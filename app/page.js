@@ -17,6 +17,7 @@ import {
   Eye,
 } from "lucide-react";
 import Image from "next/image";
+import { Analytics } from '@vercel/analytics/next';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -206,6 +207,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-4">
@@ -250,7 +252,7 @@ export default function Home() {
       {/* Hero Section — 100vh */}
       <section className="relative flex items-center overflow-hidden">
 
-        <div className="relative z-10 mt-17 max-w-7xl mx-auto px-6 sm:px-8 w-full">
+        <div className="relative z-10 mt-20 max-w-7xl mx-auto px-6 sm:px-8 w-full">
           <div className="grid lg:grid-cols-2 gap-10 items-center mb-24">
             <div className="space-y-6 order-2 lg:order-1">
               <div className="inline-flex items-center gap-2 bg-indigo-50 rounded-full px-4 py-1.5 text-sm font-medium text-indigo-700">
@@ -563,6 +565,7 @@ print(emb.shape)  # (1, 256)`}</pre>
           font-family: 'Roboto';
         }
       `}</style>
+      <Analytics />
     </div>
   );
 }
