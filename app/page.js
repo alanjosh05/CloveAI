@@ -17,7 +17,6 @@ import {
   Eye,
 } from "lucide-react";
 import Image from "next/image";
-import { Analytics } from '@vercel/analytics/next';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -565,7 +564,6 @@ print(emb.shape)  # (1, 256)`}</pre>
           font-family: 'Roboto';
         }
       `}</style>
-      <Analytics />
     </div>
   );
 }
