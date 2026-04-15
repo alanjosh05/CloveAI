@@ -561,7 +561,7 @@ print(emb.shape)  # (1, 256)`}</pre>
       <style jsx>{`
       @import url('https://fonts.googleapis.com/css2?family=Betania+Patmos&family=Playpen+Sans+Thai:wght@100..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
         .font-serif {
-          font-family: 'Roboto';
+          font-family: 'Robot';
         }
       `}</style>
     </div>
