@@ -278,7 +278,7 @@ export default function Home() {
                   Explore models <ArrowRight size={18} />
                 </a>
                 <a
-                  href="https://huggingface.co/ClovAI"
+                  href="https://huggingface.co/CloveAI"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="border text-black border-gray-300 hover:border-indigo-300 hover:bg-indigo-50 px-6 py-3 rounded-xl font-medium transition flex items-center gap-2"
