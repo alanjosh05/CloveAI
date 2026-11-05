@@ -8,6 +8,7 @@ export type SpecimenKey =
   | "web"
   | "classifier"
   | "spam"
+  | "invoice"
   | "containers"
   | "voice"
   | "phone";
@@ -311,6 +312,50 @@ function onRoundRect(r: () => number, w: number, h: number, rad: number): [numbe
   return [cx + rad * Math.cos(a), cy + rad * Math.sin(a)];
 }
 
+function invoice(put: Put, n: number, r: () => number): Note[] {
+  // A page of text with three of its fields lifted off toward the reader.
+  const W = 1.02;
+  const H = 1.46;
+  const rows = 13;
+  const rowY = (i: number) => 1.16 - i * 0.2;
+  const fields = new Map([
+    [1, 0.5],
+    [6, 0.95],
+    [11, 0.62],
+  ]);
+  const outlineN = Math.floor(n * 0.16);
+  for (let i = 0; i < outlineN; i++) {
+    const [x, y] = onRoundRect(r, W, H, 0.05);
+    put(x - 0.42, y, gauss(r) * 0.004, 0);
+  }
+  const fieldN = Math.floor(n * 0.22);
+  const lineN = n - outlineN - fieldN;
+  for (let i = 0; i < lineN; i++) {
+    const row = Math.floor(r() * rows);
+    const len = 0.45 + 0.5 * Math.abs(Math.sin(row * 2.3));
+    put(-0.42 - W * 0.82 + r() * W * 1.64 * len, rowY(row) + gauss(r) * 0.016, gauss(r) * 0.004, 0);
+  }
+  const lifted = [...fields.entries()];
+  for (let i = 0; i < fieldN; i++) {
+    const [row, z] = lifted[i % lifted.length];
+    const y = rowY(row);
+    if (r() < 0.1) {
+      // The thread each field was pulled along.
+      const t = r();
+      put(-0.42 + t * 1.1, y, t * z, 1);
+    } else if (r() < 0.55) {
+      const [x, yy] = onRoundRect(r, 0.56, 0.085, 0.03);
+      put(x + 1.24, y + yy, z, 1);
+    } else {
+      put(0.84 + r() * (0.4 + 0.3 * Math.abs(Math.sin(row))), y + gauss(r) * 0.014, z, 1);
+    }
+  }
+  return [
+    { at: [1.8, rowY(6), 0.95], text: "Key fields read from the page" },
+    { at: [-1.44, -0.96, 0], text: "Invoice flow, end to end" },
+  ];
+}
+
 function containers(put: Put, n: number, r: () => number): Note[] {
   // A container stack on a quay, with one box being hoisted into place.
   const L = 0.98;
@@ -446,6 +491,7 @@ const BUILDERS: Record<SpecimenKey, (put: Put, n: number, r: () => number) => No
   web,
   classifier,
   spam,
+  invoice,
   containers,
   voice,
   phone,
