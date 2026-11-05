@@ -1,26 +1,173 @@
-@import "tailwindcss";
+@import "../styles/globals.css";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #ffffff;
+/* Herbarium palette. BoardUI's ramps are re-pointed here so its components
+   and shadcn's share one paper, one ink and one cinnabar accent. */
+@theme {
+  --color-neutral-50: #fbf8f1;
+  --color-neutral-100: #f2ede2;
+  --color-neutral-200: #e3dccd;
+  --color-neutral-300: #cdc5b4;
+  --color-neutral-400: #a79f8d;
+  --color-neutral-500: #6f685a;
+  --color-neutral-600: #565045;
+  --color-neutral-700: #403c33;
+  --color-neutral-800: #2c2a24;
+  --color-neutral-900: #1e2019;
+  --color-neutral-950: #17211b;
+
+  --color-accent-50: #fbf1ec;
+  --color-accent-100: #f6dfd4;
+  --color-accent-200: #ecbda8;
+  --color-accent-300: #e0977a;
+  --color-accent-400: #d27450;
+  --color-accent-500: #b8431f;
+  --color-accent-600: #a23a1a;
+  --color-accent-700: #862f15;
+  --color-accent-800: #6c2711;
+  --color-accent-900: #56200f;
+  --color-accent-950: #2f1007;
+
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+
+  --color-leaf: #1d3a2c;
+  --color-code: #17211b;
+  --ease-herb: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #f5f1e8;
+  --foreground: #17211b;
+  --card: #fbf8f1;
+  --card-foreground: #17211b;
+  --popover: #fbf8f1;
+  --popover-foreground: #17211b;
+  --primary: #17211b;
+  --primary-foreground: #f5f1e8;
+  --secondary: #eae4d6;
+  --secondary-foreground: #17211b;
+  --muted: #eae4d6;
+  --muted-foreground: #565045;
+  --accent: #eae4d6;
+  --accent-foreground: #17211b;
+  --destructive: #b8431f;
+  --border: rgb(23 33 27 / 0.12);
+  --input: rgb(23 33 27 / 0.16);
+  --ring: #b8431f;
+  --radius: 0.5rem;
+
+  /* BoardUI binds its semantic tokens on :root, so they are re-pointed here. */
+  --color-background-full: #f5f1e8;
+  --color-background-primary-default: #fbf8f1;
+  --color-background-inner-default: #fbf8f1;
+  --color-text-tertiary: var(--color-neutral-500);
+  --color-border-table: rgb(23 33 27 / 0.12);
+  --color-separator-border: rgb(23 33 27 / 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
 }
+
+::selection {
+  background: var(--color-accent-200);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Headlines only. Labels and buttons stay in the interface family. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Botanical plate annotation: a dot on the specimen, a hairline, a label. */
+.plate-note {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  white-space: nowrap;
+  will-change: transform;
+  color: var(--foreground);
+}
+.plate-note::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.plate-note > i {
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+  flex: none;
+}
+.plate-note > span {
+  padding: 2px 6px;
+  background: var(--background);
+  border-radius: 4px;
+}
+.plate-note[data-side="left"] {
+  flex-direction: row-reverse;
+}
+
+/* Code panel tokens */
+.tok-c { color: #8d9a8f; }
+.tok-s { color: #e8b59a; }
+.tok-k { color: #a9c7b2; }
