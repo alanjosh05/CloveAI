@@ -12,6 +12,7 @@ const LINKS = [
   { href: "#clov-embed-v2", label: "clov-embed-v2" },
   { href: "#projects", label: "Projects" },
   { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
 ];
 
 export function Nav() {

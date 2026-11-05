@@ -8,7 +8,7 @@ export const EMAIL = "a.alanjoshua2005@gmail.com";
 
 export type Link = { href: string; label: string };
 
-// Experience, skills and education come from Alan's resume.
+// Work, skills and education come from Alan's resume.
 export type Job = {
   no: string;
   specimen: SpecimenKey;
@@ -18,6 +18,45 @@ export type Job = {
   rows: [string, string][];
   tags: string[];
 };
+
+export const BUILDING: Job[] = [
+  {
+    no: "01",
+    specimen: "containers",
+    org: "Freelance, shipping client",
+    title: "An ERP for a shipping company",
+    body: "I'm building the complete ERP system on AWS, with CI/CD deployment and AI automation for logistics workflows.",
+    rows: [
+      ["Role", "Freelance Software Engineer"],
+      ["Status", "Active client"],
+    ],
+    tags: ["ERP", "AWS", "CI/CD", "AI-automation"],
+  },
+  {
+    no: "02",
+    specimen: "voice",
+    org: "Freelance, CRM client",
+    title: "A CRM with an AI voice agent",
+    body: "I'm building a CRM on GCP. An AI voice agent calls customers for service intimation, WhatsApp handles messaging, and document extraction stores key-value fields in structured records.",
+    rows: [
+      ["Role", "Freelance Software Engineer"],
+      ["Status", "Active client"],
+    ],
+    tags: ["CRM", "GCP", "voice-agent", "WhatsApp"],
+  },
+  {
+    no: "03",
+    specimen: "phone",
+    org: "Freelance, both clients",
+    title: "One Flutter app for both systems",
+    body: "I built the internal mobile app used across the ERP and the CRM. It is company-internal and not publicly released.",
+    rows: [
+      ["Role", "Freelance Software Engineer"],
+      ["Availability", "Internal only"],
+    ],
+    tags: ["Flutter", "mobile"],
+  },
+];
 
 export const EXPERIENCE: Job[] = [
   {
@@ -31,42 +70,6 @@ export const EXPERIENCE: Job[] = [
       ["When", "Sep 2025 to present"],
     ],
     tags: ["document-extraction", "GCP", "CI/CD"],
-  },
-  {
-    no: "02",
-    specimen: "containers",
-    org: "Freelance, shipping client",
-    title: "An ERP for a shipping company",
-    body: "I'm building the complete ERP system on AWS, with CI/CD deployment and AI automation for logistics workflows.",
-    rows: [
-      ["Role", "Freelance Software Engineer"],
-      ["Status", "Active client"],
-    ],
-    tags: ["ERP", "AWS", "CI/CD", "AI-automation"],
-  },
-  {
-    no: "03",
-    specimen: "voice",
-    org: "Freelance, CRM client",
-    title: "A CRM with an AI voice agent",
-    body: "I'm building a CRM on GCP. An AI voice agent calls customers for service intimation, WhatsApp handles messaging, and document extraction stores key-value fields in structured records.",
-    rows: [
-      ["Role", "Freelance Software Engineer"],
-      ["Status", "Active client"],
-    ],
-    tags: ["CRM", "GCP", "voice-agent", "WhatsApp"],
-  },
-  {
-    no: "04",
-    specimen: "phone",
-    org: "Freelance, both clients",
-    title: "One Flutter app for both systems",
-    body: "I built the internal mobile app used across the ERP and the CRM. It is company-internal and not publicly released.",
-    rows: [
-      ["Role", "Freelance Software Engineer"],
-      ["Availability", "Internal only"],
-    ],
-    tags: ["Flutter", "mobile"],
   },
 ];
 

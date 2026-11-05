@@ -1,3 +1,4 @@
+import { Building } from "@/components/site/building";
 import { Closing } from "@/components/site/closing";
 import { Datasets } from "@/components/site/datasets";
 import { Docs } from "@/components/site/docs";
@@ -6,7 +7,7 @@ import { Hero } from "@/components/site/hero";
 import { ModelIndex } from "@/components/site/model-index";
 import { Nav } from "@/components/site/nav";
 import { Projects } from "@/components/site/projects";
-import { Skills } from "@/components/site/skills";
+import { Education, Skills } from "@/components/site/skills";
 
 export default function Home() {
   return (
@@ -14,12 +15,14 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Experience />
+        <Building />
         <Docs />
         <Projects />
         <ModelIndex />
         <Datasets />
         <Skills />
+        <Experience />
+        <Education />
       </main>
       <Closing />
     </>

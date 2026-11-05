@@ -40,7 +40,14 @@ export function Skills() {
         ))}
       </dl>
 
-      <div id="education" className="mt-24 grid scroll-mt-20 grid-cols-1 gap-8 lg:mt-32 lg:grid-cols-12">
+    </section>
+  );
+}
+
+export function Education() {
+  return (
+    <section id="education" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 pt-24 lg:px-10 lg:pt-32">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <Reveal className="lg:col-span-3">
           <h2 className="display text-[32px] leading-[1.1] md:text-[40px]">Education</h2>
         </Reveal>
