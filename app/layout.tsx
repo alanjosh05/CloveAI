@@ -14,7 +14,7 @@ const newsreader = Newsreader({
 
 const title = "Alan Joshua, builds and evaluates AI systems";
 const description =
-  "Alan Joshua is a computer science student in Coimbatore who builds and evaluates AI systems: document extraction at Nunnari Labs, ERP and CRM systems with AI automation, and clov-embed-v2, an embedding model trained from scratch.";
+  "Alan Joshua is a computer science student in Coimbatore who builds and evaluates AI systems: ERP and CRM systems with AI automation, and clov-embed-v2, an embedding model trained from scratch.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://clove-ai-research.vercel.app"),

@@ -26,12 +26,6 @@ function Entry({ job, active, register }: { job: Job; active: boolean; register:
         <p className="meta text-muted-foreground">{job.org}</p>
         <h3 className="display mt-2 text-[32px] leading-[1.1] md:text-[40px]">{job.title}</h3>
         <p className="mt-4 max-w-[34rem] text-muted-foreground">{job.body}</p>
-        {job.figure && (
-          <p className="mt-6 flex flex-wrap items-baseline gap-x-3">
-            <span className="display text-[32px] leading-none text-accent-600 tabular-nums">{job.figure.value}</span>
-            <span className="text-muted-foreground">{job.figure.label}</span>
-          </p>
-        )}
         <SpecimenLabel className="mt-6 max-w-[28rem]" rows={job.rows} tags={job.tags} />
       </div>
     </article>
@@ -64,7 +58,7 @@ export function Experience() {
       <Reveal className="max-w-[44rem]">
         <h2 className="display text-[40px] leading-[1.08] md:text-[56px]">What I&apos;m building now</h2>
         <p className="mt-4 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground">
-          An internship at Nunnari Labs and two freelance clients. Scroll, and the plate redraws itself for each one.
+          Two freelance clients and one app shared between them. Scroll, and the plate redraws itself for each one.
         </p>
       </Reveal>
 

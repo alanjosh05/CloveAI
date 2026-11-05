@@ -4,7 +4,7 @@
 
 # Alan Joshua
 
-Personal portfolio of Alan Joshua, who builds and evaluates AI systems. It covers his work at Nunnari Labs, his freelance ERP and CRM systems, and the models he publishes as [CloveAI](https://huggingface.co/CloveAI), led by [clov-embed-v2](https://huggingface.co/CloveAI/clov-embed-v2).
+Personal portfolio of Alan Joshua, who builds and evaluates AI systems. It covers his freelance ERP and CRM systems and the models he publishes as [CloveAI](https://huggingface.co/CloveAI), led by [clov-embed-v2](https://huggingface.co/CloveAI/clov-embed-v2).
 
 The site is laid out like a herbarium. Each piece of work gets a typed specimen label and a 3D plate, an ink-dot point cloud that morphs to show what it does. Each dataset is drawn with one dot per row.
 

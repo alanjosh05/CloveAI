@@ -14,8 +14,7 @@ import { Reveal } from "./reveal";
 gsap.registerPlugin(ScrollTrigger);
 
 const NOW: [string, string][] = [
-  ["Now", "GenAI Intern, Nunnari Labs"],
-  ["Also", "Freelance engineer, 2 active clients"],
+  ["Now", "Freelance engineer, 2 active clients"],
   ["Studying", "B.Tech CSBS, 2027, and B.S. Data Science, IIT Madras"],
 ];
 
@@ -47,8 +46,8 @@ export function Hero() {
             I build and evaluate AI systems
           </p>
           <p className="mt-6 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground">
-            I read invoices with AI at Nunnari Labs, build ERP and CRM systems for freelance clients on AWS and GCP, and
-            trained my own embedding model, clov-embed-v2, from scratch.
+            I build ERP and CRM systems with AI automation for freelance clients on AWS and GCP, and I trained my own
+            embedding model, clov-embed-v2, from scratch.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="xl">

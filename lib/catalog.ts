@@ -15,7 +15,6 @@ export type Job = {
   org: string;
   title: string;
   body: string;
-  figure?: { value: string; label: string };
   rows: [string, string][];
   tags: string[];
 };
@@ -23,19 +22,6 @@ export type Job = {
 export const EXPERIENCE: Job[] = [
   {
     no: "01",
-    specimen: "invoice",
-    org: "Nunnari Labs Pvt. Ltd.",
-    title: "Reading invoices at Nunnari Labs",
-    body: "I built an AI document extraction pipeline that reads invoices and automates the end-to-end invoice flow for the company's AI services. I also designed and maintain the CI/CD pipelines on GCP that build, test and deploy those services.",
-    figure: { value: "20 min to 5 min", label: "deploy time" },
-    rows: [
-      ["Role", "GenAI Intern"],
-      ["When", "Sep 2025 to present"],
-    ],
-    tags: ["document-extraction", "GCP", "CI/CD"],
-  },
-  {
-    no: "02",
     specimen: "containers",
     org: "Freelance, shipping client",
     title: "An ERP for a shipping company",
@@ -47,7 +33,7 @@ export const EXPERIENCE: Job[] = [
     tags: ["ERP", "AWS", "CI/CD", "AI-automation"],
   },
   {
-    no: "03",
+    no: "02",
     specimen: "voice",
     org: "Freelance, CRM client",
     title: "A CRM with an AI voice agent",
@@ -59,7 +45,7 @@ export const EXPERIENCE: Job[] = [
     tags: ["CRM", "GCP", "voice-agent", "WhatsApp"],
   },
   {
-    no: "04",
+    no: "03",
     specimen: "phone",
     org: "Freelance, both clients",
     title: "One Flutter app for both systems",
