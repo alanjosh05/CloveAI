@@ -212,9 +212,9 @@ export function Datasets() {
   const [webRow, pickWeb] = usePicker(web.id);
 
   return (
-    <section id="datasets" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 pt-24 lg:px-10 lg:pt-32">
+    <section id="datasets" className="w-full scroll-mt-16 px-6 pt-24 lg:px-10 min-[1920px]:px-16 lg:pt-32">
       <Reveal className="max-w-[44rem]">
-        <h2 className="display text-[40px] leading-[1.08] md:text-[56px]">Two open datasets, every row on the page</h2>
+        <h2 className="display text-[32px] leading-[1.1] md:text-[40px]">Datasets I published, every row on the page</h2>
         <p className="mt-4 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground">
           One dot per row, at the same scale. Point at any dot to read that row, fetched live from Hugging Face.
         </p>
@@ -241,8 +241,7 @@ export function Datasets() {
           />
           <SpecimenLabel
             className="mt-4"
-            href={`${HF}/datasets/CloveAI/${spam.id}`}
-            linkLabel="Explore dataset"
+            links={[{ href: `${HF}/datasets/CloveAI/${spam.id}`, label: "Explore dataset" }]}
             rows={[
               ["Rows", spam.rows.toLocaleString("en-US")],
               ["License", spam.license],
@@ -264,8 +263,7 @@ export function Datasets() {
           />
           <SpecimenLabel
             className="mt-4"
-            href={`${HF}/datasets/CloveAI/${web.id}`}
-            linkLabel="Explore dataset"
+            links={[{ href: `${HF}/datasets/CloveAI/${web.id}`, label: "Explore dataset" }]}
             rows={[
               ["Rows", web.rows.toLocaleString("en-US")],
               ["License", web.license],

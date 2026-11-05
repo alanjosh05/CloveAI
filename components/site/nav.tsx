@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { HF_ORG } from "@/lib/catalog";
 import { Logo } from "./logo";
 
 const LINKS = [
-  { href: "#docs", label: "clov-embed-v2" },
-  { href: "#models", label: "Models" },
-  { href: "#datasets", label: "Datasets" },
+  { href: "#work", label: "Work" },
+  { href: "#clov-embed-v2", label: "clov-embed-v2" },
+  { href: "#projects", label: "Projects" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
 ];
 
 export function Nav() {
@@ -21,8 +22,8 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-40 bg-background">
-      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6 lg:px-10">
-        <a href="#top" aria-label="CloveAI home" className="rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+      <div className="flex h-16 items-center justify-between px-6 lg:px-10 min-[1920px]:px-16">
+        <a href="#top" aria-label="Alan Joshua, back to top" className="rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
           <Logo draw />
         </a>
         <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
@@ -34,10 +35,7 @@ export function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild size="lg" className="hidden px-3.5 sm:inline-flex">
-            <a href={HF_ORG} target="_blank" rel="noopener noreferrer">
-              Hugging Face
-              <ArrowUpRight data-icon="inline-end" strokeWidth={1.5} />
-            </a>
+            <a href="#contact">Get in touch</a>
           </Button>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -63,13 +61,11 @@ export function Nav() {
                   </a>
                 ))}
                 <a
-                  href={HF_ORG}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-11 items-center justify-between rounded-lg px-2 text-[15px] transition-colors hover:bg-muted"
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  className="flex h-11 items-center rounded-lg px-2 text-[15px] transition-colors hover:bg-muted"
                 >
-                  Hugging Face
-                  <ArrowUpRight className="size-4" strokeWidth={1.5} />
+                  Get in touch
                 </a>
               </nav>
             </SheetContent>

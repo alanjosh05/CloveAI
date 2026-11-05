@@ -167,6 +167,15 @@ body {
   flex-direction: row-reverse;
 }
 
+/* The plant press in Skills: the Hairline palette, in the site's ink and cinnabar. */
+[data-hairline="press"] {
+  --hairline-plate: #f5f1e8;
+  --hairline-hi: #b8431f;
+  --hairline-edge: #565045;
+  --hairline-mid: #a79f8d;
+  --hairline-lo: #cdc5b4;
+}
+
 /* Code panel tokens */
 .tok-c { color: #8d9a8f; }
 .tok-s { color: #e8b59a; }

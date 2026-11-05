@@ -1,118 +1,174 @@
 import type { SpecimenKey } from "@/lib/specimens";
 
+export const SITE_URL = "https://alanjoshua.vercel.app";
 export const HF = "https://huggingface.co";
 export const HF_ORG = `${HF}/CloveAI`;
 export const LINKEDIN = "https://www.linkedin.com/in/alanjoshua2005/";
+export const GITHUB = "https://github.com/alanjosh05";
+export const EMAIL = "a.alanjoshua2005@gmail.com";
 
-export type Model = {
+export type Link = { href: string; label: string };
+
+// Work, skills and education come from Alan's resume.
+export type Job = {
   no: string;
   specimen: SpecimenKey;
-  name: string;
-  family: string;
-  params: string;
-  description: string;
-  fields: [string, string][];
+  org: string;
+  title: string;
+  body: string;
+  rows: [string, string][];
   tags: string[];
-  updated: string;
 };
 
-// Facts come from each model's card and the Hugging Face API, checked 5 Nov 2026.
-export const MODELS: Model[] = [
+export const BUILDING: Job[] = [
   {
     no: "01",
-    specimen: "embed",
-    name: "clov-embed-v2",
-    family: "Text embedding",
-    params: "34M",
-    description:
-      "A sentence embedding model trained from scratch: a 6-layer Transformer with RoPE positional embeddings, mean pooling and L2 normalization.",
-    fields: [
-      ["Output", "256 dimensions"],
-      ["Throughput", "~247 sentences/sec on CPU"],
-      ["Format", "PyTorch, ONNX FP32, ONNX INT8"],
+    specimen: "containers",
+    org: "Freelance, shipping client",
+    title: "An ERP for a shipping company",
+    body: "I'm building the complete ERP system on AWS, with CI/CD deployment and AI automation for logistics workflows.",
+    rows: [
+      ["Role", "Freelance Software Engineer"],
+      ["Status", "Active client"],
     ],
-    tags: ["sentence-transformers", "ONNX", "semantic-search", "retrieval"],
-    updated: "13 Apr 2026",
+    tags: ["ERP", "AWS", "CI/CD", "AI-automation"],
   },
   {
     no: "02",
+    specimen: "voice",
+    org: "Freelance, CRM client",
+    title: "A CRM with an AI voice agent",
+    body: "I'm building a CRM on GCP. An AI voice agent calls customers for service intimation, WhatsApp handles messaging, and document extraction stores key-value fields in structured records.",
+    rows: [
+      ["Role", "Freelance Software Engineer"],
+      ["Status", "Active client"],
+    ],
+    tags: ["CRM", "GCP", "voice-agent", "WhatsApp"],
+  },
+  {
+    no: "03",
+    specimen: "phone",
+    org: "Freelance, both clients",
+    title: "One Flutter app for both systems",
+    body: "I built the internal mobile app used across the ERP and the CRM. It is company-internal and not publicly released.",
+    rows: [
+      ["Role", "Freelance Software Engineer"],
+      ["Availability", "Internal only"],
+    ],
+    tags: ["Flutter", "mobile"],
+  },
+];
+
+export const EXPERIENCE = [
+  {
+    role: "GenAI Intern",
+    company: "Nunnari Labs Pvt. Ltd.",
+    when: "Sep 2025 to present",
+  },
+];
+
+export type Project = {
+  specimen: SpecimenKey;
+  name: string;
+  family: string;
+  description: string;
+  rows: [string, string][];
+  tags: string[];
+  links: Link[];
+};
+
+// Facts come from the resume and each model's card on Hugging Face.
+export const PROJECTS: Project[] = [
+  {
+    specimen: "web",
+    name: "Website generator",
+    family: "clov-web-1b-instruct",
+    description: "I fine-tuned Llama 3.2-1B Instruct to generate HTML and Tailwind websites from text prompts.",
+    rows: [
+      ["Base", "Llama 3.2-1B Instruct"],
+      ["Method", "LoRA with Unsloth"],
+      ["Training data", "1,500 synthetic examples"],
+    ],
+    tags: ["llama", "lora", "unsloth"],
+    links: [
+      { href: `${HF}/CloveAI/clov-web-1b-instruct`, label: "Model" },
+      { href: `${HF}/datasets/CloveAI/clov-web-synthetic`, label: "Dataset" },
+    ],
+  },
+  {
+    specimen: "spam",
+    name: "GPT-2 style spam classifier",
+    family: "India-specific SMS",
+    description: "I implemented a GPT-2 style transformer from scratch in TensorFlow to classify spam SMS.",
+    rows: [
+      ["Architecture", "GPT-2 style transformer"],
+      ["Framework", "TensorFlow"],
+      ["Training data", "20,010 SMS messages"],
+    ],
+    tags: ["from-scratch", "tensorflow", "india"],
+    links: [{ href: `${HF}/datasets/CloveAI/india-spam-sms`, label: "Dataset" }],
+  },
+  {
     specimen: "vision",
     name: "clov-vl-2b",
     family: "Vision language model",
-    params: "2B",
-    description:
-      "Qwen2-VL 2B Instruct, fine-tuned with LoRA to answer natural language questions about charts and graphs.",
-    fields: [
+    description: "Qwen2-VL 2B Instruct, fine-tuned with LoRA to answer natural language questions about charts and graphs.",
+    rows: [
       ["Base", "Qwen2-VL 2B Instruct"],
       ["Method", "LoRA, r=8, with Unsloth"],
       ["Training data", "2,000 chart QA pairs"],
     ],
-    tags: ["image-text-to-text", "qwen2-vl", "chart-qa", "lora", "unsloth"],
-    updated: "6 Mar 2026",
+    tags: ["image-text-to-text", "chart-qa", "lora"],
+    links: [{ href: `${HF}/CloveAI/clov-vl-2b`, label: "Model" }],
   },
   {
-    no: "03",
     specimen: "bio",
     name: "clov-bio-0.3b-instruct",
     family: "Biomedical LLM",
-    params: "0.3B",
-    description:
-      "BioGPT, fine-tuned with LoRA for instruction-style questions and answers in the biomedical and healthcare domain.",
-    fields: [
+    description: "BioGPT, fine-tuned with LoRA for instruction-style questions and answers in the biomedical and healthcare domain.",
+    rows: [
       ["Base", "microsoft/biogpt"],
       ["Method", "LoRA with PEFT"],
       ["Training data", "2,000 instruction pairs"],
     ],
-    tags: ["biogpt", "biomedical", "instruction-tuned", "PEFT"],
-    updated: "13 Apr 2026",
+    tags: ["biogpt", "biomedical", "PEFT"],
+    links: [{ href: `${HF}/CloveAI/clov-bio-0.3b-instruct`, label: "Model" }],
   },
   {
-    no: "04",
-    specimen: "web",
-    name: "clov-web-1b-instruct",
-    family: "Web text generation",
-    params: "1B",
-    description:
-      "A 1B parameter LLaMA-based model fine-tuned on web data. It follows instructions and ships with a full chat template.",
-    fields: [
-      ["Base", "LLaMA-based"],
-      ["Precision", "BF16"],
-      ["Training data", "clov-web-synthetic"],
-    ],
-    tags: ["llama", "text-generation", "chat-template", "BF16"],
-    updated: "10 Nov 2025",
-  },
-  {
-    no: "05",
     specimen: "classifier",
     name: "AI-text-classifier",
     family: "AI content detection",
-    params: "0.1B",
-    description:
-      "A RoBERTa classifier that estimates how likely a text is AI-generated rather than human-written. An ONNX build handles lightweight CPU inference.",
-    fields: [
+    description: "A RoBERTa classifier that estimates how likely a text is AI-generated. An ONNX build handles lightweight CPU inference.",
+    rows: [
       ["Architecture", "RoBERTa, fine-tuned"],
       ["Output", "Probability of AI text"],
       ["Format", "PyTorch, ONNX"],
     ],
     tags: ["classification", "ONNX", "ai-detection"],
-    updated: "20 Dec 2025",
+    links: [{ href: `${HF}/CloveAI/AI-text-classifier`, label: "Model" }],
+  },
+];
+
+export const SKILLS: [string, string[]][] = [
+  ["GenAI", ["LLM fine-tuning (LoRA, Unsloth)", "RAG", "LangChain", "FAISS", "MCP", "Voice agents", "WhatsApp automation", "Document extraction"]],
+  ["Evaluation", ["LLM benchmarking", "Embedding-model evaluation", "Test automation in CI/CD"]],
+  ["Machine learning", ["PyTorch", "TensorFlow", "ONNX", "YOLOv11", "Scikit-learn", "Pandas", "NumPy"]],
+  ["Cloud and delivery", ["AWS", "GCP", "CI/CD", "PostgreSQL", "SQLite", "Supabase"]],
+  ["Languages and web", ["Python", "SQL", "JavaScript", "HTML/CSS", "Flutter", "Next.js", "Tailwind CSS", "FastAPI", "Flask"]],
+];
+
+export const EDUCATION = [
+  {
+    degree: "B.Tech, Computer Science and Business Systems",
+    school: "Dr. N.G.P. Institute of Technology",
+    when: "2023 to 2027",
+    note: "CGPA 8.4/10, currently in 7th semester",
   },
   {
-    no: "06",
-    specimen: "spam",
-    name: "spam-sms-india",
-    family: "SMS spam classifier",
-    params: "0.1B",
-    description:
-      "Spam detection trained on India-specific SMS data: OTPs, bank alerts, promotional scams and delivery notices.",
-    fields: [
-      ["Labels", "Spam, ham"],
-      ["Region", "India"],
-      ["Format", "PyTorch, ONNX"],
-    ],
-    tags: ["classification", "spam-detection", "ONNX", "india"],
-    updated: "29 Sep 2025",
+    degree: "B.S., Data Science and Applications",
+    school: "Indian Institute of Technology, Madras",
+    when: "Foundation level completed",
+    note: "",
   },
 ];
 

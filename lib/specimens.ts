@@ -1,7 +1,16 @@
 // Point clouds for the 3D plates. Every specimen has the same point count so any
-// one can morph into any other, and each shape shows what its model actually does.
+// one can morph into any other, and each shape shows what that piece of work actually does.
 
-export type SpecimenKey = "clover" | "embed" | "vision" | "bio" | "web" | "classifier" | "spam";
+export type SpecimenKey =
+  | "mark"
+  | "vision"
+  | "bio"
+  | "web"
+  | "classifier"
+  | "spam"
+  | "containers"
+  | "voice"
+  | "phone";
 
 export type Note = { at: [number, number, number]; text: string };
 
@@ -44,82 +53,57 @@ function shadedSphere(put: Put, r: () => number, count: number, c: number[], rad
   }
 }
 
-function clover(put: Put, n: number, r: () => number): Note[] {
-  const dirs: [number, number][] = [
-    [Math.SQRT1_2, -Math.SQRT1_2],
-    [-Math.SQRT1_2, -Math.SQRT1_2],
-    [-Math.SQRT1_2, Math.SQRT1_2],
-  ];
-  const L = 1.72;
-  const inner = 0.1;
-  const hw = 0.5;
-  const leafN = Math.floor((n * 0.78) / 3);
+function mark(put: Put, n: number, r: () => number): Note[] {
+  // The AJ logo as a thin slab. Works in the logo's own 256 grid, centred and flipped into world space.
+  const S = 3.2 / 227;
+  const depth = 0.09;
+  const k = Math.tan(Math.PI / 3);
+  const leftOfLeg = (y: number) => 177 - (y - 16) / k;
+  const slab = (x: number, y: number, tone = 0) => {
+    // Most dots sit on the two faces, so the letters stay crisp as the slab turns.
+    const z = r() < 0.82 ? (r() < 0.5 ? -depth : depth) : (r() * 2 - 1) * depth;
+    put((x - 128) * S, (130 - y) * S, z, tone);
+  };
+  const cubic = (p: number[][], t: number) => {
+    const u = 1 - t;
+    return [0, 1].map(
+      (a) => u * u * u * p[0][a] + 3 * u * u * t * p[1][a] + 3 * u * t * t * p[2][a] + t * t * t * p[3][a],
+    );
+  };
+  const outer = [[197, 172], [197, 220], [163, 243], [121, 243]];
+  const inner = [[163, 172], [163, 212], [145, 230], [121, 230]];
 
-  dirs.forEach(([dx, dy]) => {
-    const lat = [-dy, dx];
-    for (let i = 0; i < leafN; i++) {
-      const pick = r();
-      let u: number;
-      let v: number;
-      if (pick < 0.46) {
-        u = Math.acos(1 - 2 * r()) / Math.PI;
-        v = (r() * 2 - 1) * 0.98;
-      } else if (pick < 0.68) {
-        u = r();
-        v = (r() < 0.5 ? -1 : 1) * (0.97 + r() * 0.03);
-      } else if (pick < 0.82) {
-        u = r();
-        v = gauss(r) * 0.012;
-      } else {
-        // side veins sweep forward from the midrib to the rim
-        const k = 1 + Math.floor(r() * 5);
-        const t = r();
-        const side = r() < 0.5 ? -1 : 1;
-        u = Math.min(1, k / 7.5 + t * 0.14);
-        v = side * t * 0.95;
-      }
-      const w = hw * Math.pow(Math.sin(Math.PI * u), 0.82);
-      const along = inner + u * (L - inner);
-      const across = v * w;
-      const cup = 0.34 * Math.sin(Math.PI * u) - 0.5 * (v * w) * (v * w) * 2.2 - 0.28 * u * u;
-      put(dx * along + lat[0] * across, dy * along + lat[1] * across, cup + gauss(r) * 0.006, 0);
-    }
-  });
+  const dotN = Math.floor(n * 0.12);
+  const legN = Math.floor(n * 0.3);
+  const barN = Math.floor(n * 0.06);
+  const bowlN = Math.floor(n * 0.2);
+  const stemN = n - dotN - legN - barN - bowlN;
 
-  const placed = leafN * 3;
-  shadedSphere(put, r, n - placed, [0.72, 0.72, 0.12], 0.44, 1);
-  return [
-    { at: [1.02, 1.02, 0.3], text: "Fourth sepal, a data point" },
-    { at: [-0.7, 0.7, 0.3], text: "Drag to turn" },
-  ];
-}
-
-function embed(put: Put, n: number, r: () => number): Note[] {
-  const R = 1.42;
-  const shell = Math.floor(n * 0.2);
-  for (let i = 0; i < shell; i++) {
-    const p = onSphere(r);
-    put(p[0] * R, p[1] * R, p[2] * R, 0);
+  for (let i = 0; i < stemN; i++) {
+    const y = 16 + r() * 156;
+    const x = 163 + r() * 34;
+    // The stem's top is cut along the leg, so the apex stays one point.
+    if (x < leftOfLeg(y)) slab(leftOfLeg(y) + r() * (197 - leftOfLeg(y)), y);
+    else slab(x, y);
   }
-  const centers = Array.from({ length: 9 }, () => onSphere(r));
-  const hero: [number, number, number] = [0.5, 0.62, 0.6];
-  const hl = Math.hypot(...hero);
-  centers[0] = [hero[0] / hl, hero[1] / hl, hero[2] / hl];
-  const rest = n - shell;
-  for (let i = 0; i < rest; i++) {
-    const c = i % centers.length;
-    const s = c === 0 ? 0.1 : 0.09 + 0.08 * ((c * 37) % 5) * 0.25;
-    const x = centers[c][0] + gauss(r) * s;
-    const y = centers[c][1] + gauss(r) * s;
-    const z = centers[c][2] + gauss(r) * s;
-    const l = Math.hypot(x, y, z);
-    put((x / l) * R, (y / l) * R, (z / l) * R, c === 0 ? 1 : 0);
+  for (let i = 0; i < bowlN; i++) {
+    const t = r();
+    const a = cubic(inner, t);
+    const b = cubic(outer, t);
+    const u = r();
+    slab(a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u);
   }
-  const a = centers[0];
-  return [
-    { at: [a[0] * R, a[1] * R, a[2] * R], text: "Similar sentences land close" },
-    { at: [-R * 0.72, -R * 0.7, R * 0.05], text: "256 dimensions, L2 normalized" },
-  ];
+  for (let i = 0; i < legN; i++) {
+    const y = 16 + r() * 180;
+    slab(leftOfLeg(y) + r() * 15, y);
+  }
+  for (let i = 0; i < barN; i++) {
+    const y = 134 + r() * 12;
+    const x0 = leftOfLeg(y) + 15;
+    slab(x0 + r() * (163 - x0), y);
+  }
+  shadedSphere(put, r, dotN, [(77.58 - 128) * S, (130 - 217) * S, 0], 19 * S, 1);
+  return [];
 }
 
 function vision(put: Put, n: number, r: () => number): Note[] {
@@ -306,14 +290,165 @@ function spam(put: Put, n: number, r: () => number): Note[] {
   ];
 }
 
+/** A point on the outline of a rounded rectangle centered on the origin. */
+function onRoundRect(r: () => number, w: number, h: number, rad: number): [number, number] {
+  const sx = 2 * (w - rad);
+  const sy = 2 * (h - rad);
+  const arc = (Math.PI / 2) * rad;
+  let t = r() * (2 * sx + 2 * sy + 4 * arc);
+  if (t < sx) return [-w + rad + t, h];
+  t -= sx;
+  if (t < sx) return [-w + rad + t, -h];
+  t -= sx;
+  if (t < sy) return [-w, -h + rad + t];
+  t -= sy;
+  if (t < sy) return [w, -h + rad + t];
+  t -= sy;
+  const corner = Math.floor(t / arc);
+  const a = ((t - corner * arc) / arc) * (Math.PI / 2) + (corner * Math.PI) / 2;
+  const cx = corner === 0 || corner === 3 ? w - rad : -w + rad;
+  const cy = corner < 2 ? h - rad : -h + rad;
+  return [cx + rad * Math.cos(a), cy + rad * Math.sin(a)];
+}
+
+function containers(put: Put, n: number, r: () => number): Note[] {
+  // A container stack on a quay, with one box being hoisted into place.
+  const L = 0.98;
+  const T = 0.46;
+  const D = 0.5;
+  const base = -1.25;
+  const boxes: { c: number[]; hit: boolean }[] = [];
+  for (let tier = 0; tier < 3; tier++) {
+    for (let col = 0; col < 3; col++) {
+      for (let deep = 0; deep < 2; deep++) {
+        boxes.push({ c: [(col - 1) * 1.06, base + T / 2 + tier * 0.5, (deep - 0.5) * 0.56], hit: false });
+      }
+    }
+  }
+  boxes.push({ c: [-1.06, base + T / 2 + 1.5, 0.28], hit: false });
+  boxes.push({ c: [-1.06, base + T / 2 + 1.5, -0.28], hit: false });
+  const hoist = [0.3, base + T / 2 + 2.1, 0.28];
+  boxes.push({ c: hoist, hit: true });
+
+  const cableN = Math.floor(n * 0.015);
+  for (let i = 0; i < cableN; i++) {
+    put(hoist[0] + gauss(r) * 0.004, hoist[1] + T / 2 + r() * 0.5, hoist[2], 1);
+  }
+  const per = Math.floor((n - cableN) / boxes.length);
+  boxes.forEach(({ c, hit }, b) => {
+    const count = b === boxes.length - 1 ? n - cableN - per * (boxes.length - 1) : per;
+    const tone = hit ? 1 : 0;
+    for (let i = 0; i < count; i++) {
+      const pick = r();
+      let x = (r() - 0.5) * L;
+      let y = (r() - 0.5) * T;
+      let z = (r() - 0.5) * D;
+      if (pick < 0.3) {
+        // Hard edges so each box reads as a box.
+        const axis = Math.floor(r() * 3);
+        if (axis !== 0) x = (r() < 0.5 ? -0.5 : 0.5) * L;
+        if (axis !== 1) y = (r() < 0.5 ? -0.5 : 0.5) * T;
+        if (axis !== 2) z = (r() < 0.5 ? -0.5 : 0.5) * D;
+      } else if (pick < 0.82) {
+        // Corrugated long sides.
+        z = (r() < 0.5 ? -0.5 : 0.5) * D;
+        x = (Math.round((x / L) * 14) / 14) * L;
+      } else if (pick < 0.92) {
+        x = (r() < 0.5 ? -0.5 : 0.5) * L;
+      } else {
+        y = 0.5 * T;
+      }
+      put(c[0] + x, c[1] + y, c[2] + z, tone);
+    }
+  });
+  return [
+    { at: [hoist[0] + L / 2, hoist[1], hoist[2]], text: "AI automation for logistics" },
+    { at: [-1.06 - L / 2, base + 0.4, 0.28], text: "ERP for a shipping company" },
+  ];
+}
+
+function voice(put: Put, n: number, r: () => number): Note[] {
+  // A spoken phrase as a waveform, bending toward the reader, with an echo behind it.
+  const bars = 57;
+  const X = 1.9;
+  const amp = (k: number) => {
+    const u = (k / (bars - 1)) * 2 - 1;
+    const env = Math.exp(-u * u * 2.6);
+    return 0.1 + 1.25 * env * (0.32 + 0.68 * Math.abs(Math.sin(k * 0.73) * Math.cos(k * 0.31)));
+  };
+  const total = Array.from({ length: bars }, (_, k) => amp(k)).reduce((a, b) => a + b, 0);
+  const echoN = Math.floor(n * 0.2);
+  for (let i = 0; i < echoN; i++) {
+    const k = Math.floor(r() * bars);
+    const x = ((k / (bars - 1)) * 2 - 1) * X;
+    put(x + gauss(r) * 0.006, (r() * 2 - 1) * amp(k) * 0.42, -0.62 + 0.3 * Math.cos(x * 0.8), 0);
+  }
+  let left = n - echoN;
+  for (let k = 0; k < bars; k++) {
+    const c = k === bars - 1 ? left : Math.floor(((n - echoN) * amp(k)) / total);
+    left -= c;
+    const x = ((k / (bars - 1)) * 2 - 1) * X;
+    const z = 0.46 * Math.cos(x * 0.8);
+    const tone = Math.abs(k - 28) <= 4 ? 1 : 0;
+    for (let i = 0; i < c; i++) {
+      put(x + (r() - 0.5) * 0.034, (r() * 2 - 1) * amp(k), z + (r() - 0.5) * 0.034, tone);
+    }
+  }
+  return [
+    { at: [0, amp(28), 0.46], text: "AI voice agent calling customers" },
+    { at: [-1.5, -0.3, 0.1], text: "WhatsApp and structured records" },
+  ];
+}
+
+function phone(put: Put, n: number, r: () => number): Note[] {
+  // The body of a phone, a list on its screen, one row raised under a finger.
+  const W = 0.86;
+  const H = 1.68;
+  const bodyN = Math.floor(n * 0.3);
+  for (let i = 0; i < bodyN; i++) {
+    const [x, y] = onRoundRect(r, W, H, 0.17);
+    put(x, y, (r() < 0.5 ? -1 : 1) * 0.07 * (r() < 0.8 ? 1 : r()), 0);
+  }
+  const rows = 6;
+  const rowY = (i: number) => 1.08 - i * 0.44;
+  const hit = 2;
+  const left = n - bodyN;
+  for (let i = 0; i < left; i++) {
+    const row = i % rows;
+    const isHit = row === hit;
+    const z = isHit ? 0.42 : 0.07;
+    const grow = isHit ? 1.1 : 1;
+    const y = rowY(row);
+    const pick = r();
+    if (pick < 0.42) {
+      const [x, yy] = onRoundRect(r, 0.68 * grow, 0.17 * grow, 0.05);
+      put(x, y + yy, z, isHit ? 1 : 0);
+    } else if (pick < 0.62) {
+      // Avatar in the row.
+      const a = r() * 2 * Math.PI;
+      const rad = 0.085 * Math.sqrt(r());
+      put(-0.46 * grow + rad * Math.cos(a), y + rad * Math.sin(a), z, isHit ? 1 : 0);
+    } else {
+      const line = r() < 0.5 ? 1 : -1;
+      put(-0.28 + r() * (line > 0 ? 0.8 : 0.5), y + line * 0.05 + gauss(r) * 0.01, z, isHit ? 1 : 0);
+    }
+  }
+  return [
+    { at: [0.75, rowY(hit), 0.42], text: "One app across the ERP and CRM" },
+    { at: [-W, -1.1, 0.07], text: "Company-internal, not public" },
+  ];
+}
+
 const BUILDERS: Record<SpecimenKey, (put: Put, n: number, r: () => number) => Note[]> = {
-  clover,
-  embed,
+  mark,
   vision,
   bio,
   web,
   classifier,
   spam,
+  containers,
+  voice,
+  phone,
 };
 
 const cache = new Map<string, Cloud>();

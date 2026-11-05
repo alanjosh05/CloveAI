@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, JetBrains_Mono, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SITE_URL } from "@/lib/catalog";
 import "./globals.css";
 
 const instrument = Instrument_Sans({ variable: "--font-instrument", subsets: ["latin"] });
@@ -12,25 +13,39 @@ const newsreader = Newsreader({
   axes: ["opsz"],
 });
 
+const title = "Alan Joshua | AI Engineer in Coimbatore, India";
 const description =
-  "clov-embed-v2 is a 34M parameter sentence embedding model trained from scratch by Alan Joshua. CloveAI also publishes a chart-reading vision model, a biomedical LLM, classifiers and open datasets on Hugging Face.";
+  "Alan Joshua is an AI engineer in Coimbatore, India, building ERP and CRM systems with AI automation and clov-embed-v2, an embedding model trained from scratch.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://clove-ai-sooty.vercel.app"),
-  title: "CloveAI, home of clov-embed-v2 by Alan Joshua",
+  metadataBase: new URL(SITE_URL),
+  title,
   description,
-  keywords:
-    "AI, machine learning, text embedding, vision language model, biomedical LLM, open source, Hugging Face, ONNX, sentence-transformers",
-  authors: [{ name: "Alan Joshua", url: "https://huggingface.co/CloveAI" }],
+  applicationName: "Alan Joshua",
+  alternates: { canonical: "/" },
+  authors: [{ name: "Alan Joshua", url: SITE_URL }],
   creator: "Alan Joshua",
-  publisher: "CloveAI",
   category: "technology",
-  openGraph: {
-    title: "CloveAI, home of clov-embed-v2 by Alan Joshua",
-    description,
-    images: [{ url: "/brand/icon-512.png", width: 512, height: 512, alt: "CloveAI" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
+  openGraph: {
+    type: "profile",
+    url: "/",
+    siteName: "Alan Joshua",
+    locale: "en_IN",
+    title,
+    description,
+    firstName: "Alan",
+    lastName: "Joshua",
+  },
+  twitter: { card: "summary_large_image", title, description },
+  verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
 };
+
+export const viewport: Viewport = { themeColor: "#f5f1e8" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
