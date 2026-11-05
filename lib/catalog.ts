@@ -58,18 +58,11 @@ export const BUILDING: Job[] = [
   },
 ];
 
-export const EXPERIENCE: Job[] = [
+export const EXPERIENCE = [
   {
-    no: "01",
-    specimen: "invoice",
-    org: "Nunnari Labs Pvt. Ltd.",
-    title: "GenAI Intern at Nunnari Labs",
-    body: "I built an AI document extraction pipeline that reads invoices and automates the end-to-end invoice flow for the company's AI services. I also designed and maintain the CI/CD pipelines on GCP that build, test and deploy those services, which cut deploy time from 20 minutes to 5.",
-    rows: [
-      ["Role", "GenAI Intern"],
-      ["When", "Sep 2025 to present"],
-    ],
-    tags: ["document-extraction", "GCP", "CI/CD"],
+    role: "GenAI Intern",
+    company: "Nunnari Labs Pvt. Ltd.",
+    when: "Sep 2025 to present",
   },
 ];
 
