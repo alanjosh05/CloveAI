@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p>
+  <img src="public/brand/lockup.svg" alt="CloveAI" height="48">
+</p>
 
-## Getting Started
+Portfolio site for [CloveAI](https://huggingface.co/CloveAI), built around [clov-embed-v2](https://huggingface.co/CloveAI/clov-embed-v2), a sentence embedding model Alan Joshua trained from scratch.
 
-First, run the development server:
+The site is laid out like a herbarium. The other models each get a typed specimen label and a 3D plate, an ink-dot point cloud that morphs to show what the model does. Each dataset is drawn with one dot per row.
+
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Use `npm run build` for a production build and `npm run lint` to lint.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Path | What it holds |
+| --- | --- |
+| `lib/catalog.ts` | Every model and dataset fact on the page. Edit this when something is published |
+| `lib/specimens.ts` | The point cloud for each 3D plate |
+| `lib/spam-labels.ts` | Real labels for `india-spam-sms`, one bit per row |
+| `components/site/` | The page sections |
+| `components/ui/` | shadcn/ui components |
+| `components/base/` | BoardUI components |
+| `public/brand/` | Logo files |
 
-## Learn More
+## Stack
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js 16, React 19, Tailwind CSS 4
+- Three.js with React Three Fiber for the plates
+- GSAP ScrollTrigger for scroll-driven specimen changes and the hero scatter
+- Framer Motion for section entrances and the plate rail
+- Anime.js for the logo draw-on, number counters and dataset plates
+- shadcn/ui for buttons, tabs, the mobile menu and tooltips
+- BoardUI for the sortable model index
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Dataset rows are read live from the Hugging Face datasets server when a visitor points at a dot.
