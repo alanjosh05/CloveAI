@@ -13,7 +13,7 @@ const LINKS = [
 export function Closing() {
   return (
     <>
-      <section id="contact" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 py-24 lg:px-10 lg:py-32">
+      <section id="contact" className="w-full scroll-mt-16 px-6 py-24 lg:px-10 min-[1920px]:px-16 lg:py-32">
         <Reveal className="grid grid-cols-1 items-end gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="min-w-0 lg:col-span-8">
             <h2 className="display text-[44px] leading-[1.04] tracking-[-0.03em] md:text-[72px]">Get in touch</h2>
@@ -43,7 +43,7 @@ export function Closing() {
           </div>
         </Reveal>
       </section>
-      <footer className="mx-auto w-full max-w-[1440px] px-6 pb-8 lg:px-10">
+      <footer className="w-full px-6 pb-8 lg:px-10 min-[1920px]:px-16">
         <Separator />
         <div className="flex flex-col justify-between gap-4 pt-6 md:flex-row md:items-center">
           <Logo />

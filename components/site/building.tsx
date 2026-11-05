@@ -54,7 +54,7 @@ export function Building() {
   );
 
   return (
-    <section ref={root} id="work" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 pt-24 pb-24 lg:px-10 lg:pt-32 lg:pb-32">
+    <section ref={root} id="work" className="w-full scroll-mt-16 px-6 pt-24 pb-24 lg:px-10 min-[1920px]:px-16 lg:pt-32 lg:pb-32">
       <Reveal className="max-w-[44rem]">
         <h2 className="display text-[40px] leading-[1.08] md:text-[56px]">What I&apos;m building now</h2>
         <p className="mt-4 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground">

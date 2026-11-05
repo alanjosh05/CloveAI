@@ -22,7 +22,7 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-40 bg-background">
-      <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6 lg:px-10">
+      <div className="flex h-16 items-center justify-between px-6 lg:px-10 min-[1920px]:px-16">
         <a href="#top" aria-label="Alan Joshua, back to top" className="rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
           <Logo draw />
         </a>

@@ -35,17 +35,17 @@ export function Hero() {
   );
 
   return (
-    <section ref={root} id="top" className="relative mx-auto w-full max-w-[1440px] px-6 lg:px-10">
+    <section ref={root} id="top" className="relative w-full px-6 lg:px-10 min-[1920px]:px-16">
       <div className="grid grid-cols-1 lg:min-h-[calc(100svh-65px)] lg:grid-cols-12 lg:gap-8">
         <Reveal className="z-10 flex flex-col justify-center pt-12 pb-8 lg:col-span-6 lg:pt-0 lg:pb-16">
           <p className="meta text-muted-foreground">Coimbatore, India</p>
-          <h1 className="display mt-4 text-[56px] leading-[1.02] tracking-[-0.03em] text-foreground md:text-[80px] xl:text-[104px]">
+          <h1 className="display mt-4 text-[56px] leading-[1.02] tracking-[-0.03em] text-foreground md:text-[80px] xl:text-[104px] min-[1920px]:text-[136px]">
             Alan Joshua
           </h1>
-          <p className="display mt-3 text-[28px] leading-[1.15] text-foreground md:text-[36px]">
+          <p className="display mt-3 text-[28px] leading-[1.15] text-foreground md:text-[36px] min-[1920px]:text-[44px]">
             I build and evaluate AI systems
           </p>
-          <p className="mt-6 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground">
+          <p className="mt-6 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground min-[1920px]:max-w-[40rem] min-[1920px]:text-[20px] min-[1920px]:leading-[32px]">
             I build ERP and CRM systems with AI automation for freelance clients on AWS and GCP, and I trained my own
             embedding model, clov-embed-v2, from scratch.
           </p>
@@ -85,8 +85,8 @@ export function Hero() {
             width={650}
             height={782}
             priority
-            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 320px, 260px"
-            className="pointer-events-none absolute right-0 bottom-0 h-auto w-[260px] grayscale-[0.9] contrast-[1.04] md:w-[320px] xl:w-[440px]"
+            sizes="(min-width: 1920px) 620px, (min-width: 1280px) 440px, (min-width: 1024px) 320px, 260px"
+            className="pointer-events-none absolute right-0 bottom-0 h-auto w-[260px] grayscale-[0.9] contrast-[1.04] md:w-[320px] xl:w-[440px] min-[1920px]:w-[620px]"
           />
           <p className="meta absolute bottom-4 left-0 hidden max-w-[28%] text-muted-foreground md:block">Drag the mark to turn it</p>
         </div>

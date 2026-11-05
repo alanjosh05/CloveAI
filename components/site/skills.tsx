@@ -14,7 +14,7 @@ export function Skills() {
   const active = SHEETS.indexOf(read.split(" ")[0]);
 
   return (
-    <section id="skills" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 pt-24 lg:px-10 lg:pt-32">
+    <section id="skills" className="w-full scroll-mt-16 px-6 pt-24 lg:px-10 min-[1920px]:px-16 lg:pt-32">
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
           <h2 className="display text-[40px] leading-[1.08] md:text-[56px]">Skills</h2>
@@ -22,7 +22,7 @@ export function Skills() {
             Five groups, kept in a plant press. Point at a sheet to pull it out.
           </p>
         </Reveal>
-        <Press onRead={setRead} className="mx-auto w-full max-w-[420px] lg:col-span-5 lg:col-start-8" />
+        <Press onRead={setRead} className="mx-auto w-full max-w-[420px] min-[1920px]:max-w-[600px] lg:col-span-5 lg:col-start-8" />
       </div>
       <dl className="mt-8 border-b border-border">
         {SKILLS.map(([group, items], i) => (
@@ -46,7 +46,7 @@ export function Skills() {
 
 export function Education() {
   return (
-    <section id="education" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 pt-24 lg:px-10 lg:pt-32">
+    <section id="education" className="w-full scroll-mt-16 px-6 pt-24 lg:px-10 min-[1920px]:px-16 lg:pt-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <Reveal className="lg:col-span-3">
           <h2 className="display text-[32px] leading-[1.1] md:text-[40px]">Education</h2>

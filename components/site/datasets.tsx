@@ -212,7 +212,7 @@ export function Datasets() {
   const [webRow, pickWeb] = usePicker(web.id);
 
   return (
-    <section id="datasets" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 pt-24 lg:px-10 lg:pt-32">
+    <section id="datasets" className="w-full scroll-mt-16 px-6 pt-24 lg:px-10 min-[1920px]:px-16 lg:pt-32">
       <Reveal className="max-w-[44rem]">
         <h2 className="display text-[32px] leading-[1.1] md:text-[40px]">Datasets I published, every row on the page</h2>
         <p className="mt-4 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground">

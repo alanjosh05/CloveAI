@@ -3,7 +3,7 @@ import { Reveal } from "./reveal";
 
 export function Experience() {
   return (
-    <section id="experience" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 pt-24 lg:px-10 lg:pt-32">
+    <section id="experience" className="w-full scroll-mt-16 px-6 pt-24 lg:px-10 min-[1920px]:px-16 lg:pt-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <Reveal className="lg:col-span-3">
           <h2 className="display text-[32px] leading-[1.1] md:text-[40px]">Experience</h2>

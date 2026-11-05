@@ -33,7 +33,7 @@ export function ModelIndex() {
   }, [sort]);
 
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-16 lg:px-10">
+    <section className="w-full px-6 pt-16 lg:px-10 min-[1920px]:px-16">
       <Reveal className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
         <h3 className="display text-[24px] leading-[1.2]">Everything I&apos;ve published on Hugging Face, 17 models</h3>
         <div className="flex flex-wrap items-center gap-4">

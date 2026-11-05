@@ -143,7 +143,7 @@ export function Docs() {
 
   return (
     <section id="clov-embed-v2" className="scroll-mt-16 bg-code text-[#f5f1e8]">
-      <div className="mx-auto w-full max-w-[1440px] px-6 py-24 lg:px-10 lg:py-32">
+      <div className="w-full px-6 py-24 lg:px-10 min-[1920px]:px-16 lg:py-32">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-5">
             <p className="meta text-[#a9b4aa]">Featured project</p>

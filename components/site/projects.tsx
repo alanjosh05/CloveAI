@@ -12,7 +12,7 @@ export function Projects() {
   const project = PROJECTS.find((p) => p.name === open) ?? PROJECTS[0];
 
   return (
-    <section id="projects" className="mx-auto w-full max-w-[1440px] scroll-mt-16 px-6 pt-24 lg:px-10 lg:pt-32">
+    <section id="projects" className="w-full scroll-mt-16 px-6 pt-24 lg:px-10 min-[1920px]:px-16 lg:pt-32">
       <Reveal className="max-w-[44rem]">
         <h2 className="display text-[40px] leading-[1.08] md:text-[56px]">More models I&apos;ve trained</h2>
         <p className="mt-4 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground">
@@ -21,7 +21,7 @@ export function Projects() {
       </Reveal>
 
       <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-        <div className="sticky top-16 z-20 -mx-6 h-[36svh] border-b border-border bg-background px-6 lg:top-24 lg:col-span-7 lg:mx-0 lg:h-[600px] lg:self-start lg:border-0 lg:px-0">
+        <div className="sticky top-16 z-20 -mx-6 h-[36svh] border-b border-border bg-background px-6 lg:top-24 lg:col-span-7 lg:mx-0 lg:h-[600px] min-[1920px]:h-[800px] lg:self-start lg:border-0 lg:px-0">
           <div className="relative size-full">
             <LazySpecimen specimen={project.specimen} label={`Plate for ${project.name}. Drag to turn it.`} />
           </div>
