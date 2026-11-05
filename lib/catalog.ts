@@ -1,5 +1,6 @@
 import type { SpecimenKey } from "@/lib/specimens";
 
+export const SITE_URL = "https://alanjoshua.vercel.app";
 export const HF = "https://huggingface.co";
 export const HF_ORG = `${HF}/CloveAI`;
 export const LINKEDIN = "https://www.linkedin.com/in/alanjoshua2005/";

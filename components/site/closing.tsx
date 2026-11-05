@@ -29,7 +29,7 @@ export function Closing() {
                   key={l.href}
                   href={l.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="me noopener noreferrer"
                   className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {l.label}

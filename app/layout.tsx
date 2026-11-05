@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, JetBrains_Mono, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SITE_URL } from "@/lib/catalog";
 import "./globals.css";
 
 const instrument = Instrument_Sans({ variable: "--font-instrument", subsets: ["latin"] });
@@ -12,25 +13,39 @@ const newsreader = Newsreader({
   axes: ["opsz"],
 });
 
-const title = "Alan Joshua, builds and evaluates AI systems";
+const title = "Alan Joshua | AI Engineer in Coimbatore, India";
 const description =
-  "Alan Joshua is a computer science student in Coimbatore who builds and evaluates AI systems: ERP and CRM systems with AI automation, and clov-embed-v2, an embedding model trained from scratch.";
+  "Alan Joshua is an AI engineer in Coimbatore, India, building ERP and CRM systems with AI automation and clov-embed-v2, an embedding model trained from scratch.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://clove-ai-research.vercel.app"),
+  metadataBase: new URL(SITE_URL),
   title,
   description,
-  keywords:
-    "Alan Joshua, portfolio, GenAI engineer, document extraction, LLM fine-tuning, text embedding, ONNX, Hugging Face, Coimbatore",
-  authors: [{ name: "Alan Joshua", url: "https://github.com/alanjosh05" }],
+  applicationName: "Alan Joshua",
+  alternates: { canonical: "/" },
+  authors: [{ name: "Alan Joshua", url: SITE_URL }],
   creator: "Alan Joshua",
   category: "technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
   openGraph: {
+    type: "profile",
+    url: "/",
+    siteName: "Alan Joshua",
+    locale: "en_IN",
     title,
     description,
-    images: [{ url: "/brand/icon-512.png", width: 512, height: 512, alt: "Alan Joshua's AJ logo" }],
+    firstName: "Alan",
+    lastName: "Joshua",
   },
+  twitter: { card: "summary_large_image", title, description },
+  verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
 };
+
+export const viewport: Viewport = { themeColor: "#f5f1e8" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

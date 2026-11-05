@@ -8,10 +8,12 @@ import { ModelIndex } from "@/components/site/model-index";
 import { Nav } from "@/components/site/nav";
 import { Projects } from "@/components/site/projects";
 import { Education, Skills } from "@/components/site/skills";
+import { StructuredData } from "@/components/site/structured-data";
 
 export default function Home() {
   return (
     <>
+      <StructuredData />
       <Nav />
       <main>
         <Hero />

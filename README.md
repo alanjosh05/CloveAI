@@ -4,6 +4,8 @@
 
 # Alan Joshua
 
+Live at [alanjoshua.vercel.app](https://alanjoshua.vercel.app).
+
 Personal portfolio of Alan Joshua, who builds and evaluates AI systems. It covers his freelance ERP and CRM systems and the models he publishes as [CloveAI](https://huggingface.co/CloveAI), led by [clov-embed-v2](https://huggingface.co/CloveAI/clov-embed-v2).
 
 The site is laid out like a herbarium. Each piece of work gets a typed specimen label and a 3D plate, an ink-dot point cloud that morphs to show what it does. Each dataset is drawn with one dot per row.
@@ -27,6 +29,7 @@ Open http://localhost:3000. Use `npm run build` for a production build and `npm 
 | `components/site/` | The page sections |
 | `components/ui/` | shadcn/ui components |
 | `components/base/` | BoardUI components |
+| `app/robots.ts`, `app/sitemap.ts`, `components/site/structured-data.tsx` | Search engine setup. Set `GOOGLE_SITE_VERIFICATION` on Vercel to verify in Search Console |
 | `public/brand/` | Logo files: the AJ mark, its heavier small cut, lockups and icons |
 | `public/hairline/` | The plant press in Skills: the unchanged Hairline engine (`kernel.js`), the figure (`press.js`) and a standalone page (`press.html`) |
 
