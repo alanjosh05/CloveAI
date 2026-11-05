@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { SortDescriptor } from "react-aria-components";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@/components/base/table/table";
 import { ALL_MODELS, HF, HF_ORG, type IndexRow } from "@/lib/catalog";
 import { Reveal } from "./reveal";
@@ -22,6 +23,7 @@ const COLUMNS: { id: keyof IndexRow; label: string; hideOnMobile?: boolean }[] =
 ];
 
 export function ModelIndex() {
+  const [open, setOpen] = useState(false);
   const [sort, setSort] = useState<SortDescriptor>({ column: "updated", direction: "descending" });
 
   const rows = useMemo(() => {
@@ -31,19 +33,26 @@ export function ModelIndex() {
   }, [sort]);
 
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-24 lg:px-10">
-      <Reveal className="flex flex-wrap items-end justify-between gap-4">
-        <h2 className="display text-[32px] leading-[1.1] md:text-[40px]">The full collection, 17 models</h2>
-        <a
-          href={`${HF_ORG}/models`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-sm font-medium text-accent-600 transition-colors hover:text-accent-800"
-        >
-          View all models on Hugging Face
-          <ArrowUpRight className="size-4" strokeWidth={1.5} />
-        </a>
+    <section className="mx-auto w-full max-w-[1440px] px-6 pt-16 lg:px-10">
+      <Reveal className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+        <h3 className="display text-[24px] leading-[1.2]">Everything I&apos;ve published on Hugging Face, 17 models</h3>
+        <div className="flex flex-wrap items-center gap-4">
+          <a
+            href={`${HF_ORG}/models`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm font-medium text-accent-600 transition-colors hover:text-accent-800"
+          >
+            CloveAI on Hugging Face
+            <ArrowUpRight className="size-4" strokeWidth={1.5} />
+          </a>
+          <Button variant="outline" size="lg" aria-expanded={open} onClick={() => setOpen((v) => !v)} className="bg-transparent">
+            {open ? "Hide the list" : "Show the list"}
+            {open ? <ChevronUp data-icon="inline-end" strokeWidth={1.5} /> : <ChevronDown data-icon="inline-end" strokeWidth={1.5} />}
+          </Button>
+        </div>
       </Reveal>
+      {open && (
       <div className="mt-8">
         <Table aria-label="All CloveAI models" size="sm" sortDescriptor={sort} onSortChange={setSort}>
           <TableHeader>
@@ -87,6 +96,7 @@ export function ModelIndex() {
           </TableBody>
         </Table>
       </div>
+      )}
     </section>
   );
 }

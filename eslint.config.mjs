@@ -10,6 +10,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Hairline's engine and figure are plain browser scripts.
+    "public/hairline/**",
   ]),
 ]);
 

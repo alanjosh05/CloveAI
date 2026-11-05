@@ -142,15 +142,16 @@ export function Docs() {
   };
 
   return (
-    <section id="docs" className="scroll-mt-16 bg-code text-[#f5f1e8]">
+    <section id="clov-embed-v2" className="scroll-mt-16 bg-code text-[#f5f1e8]">
       <div className="mx-auto w-full max-w-[1440px] px-6 py-24 lg:px-10 lg:py-32">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-5">
-            <p className="meta text-[#a9b4aa]">No. 01, clov-embed-v2</p>
-            <h2 className="display mt-4 text-[40px] leading-[1.08] md:text-[56px]">Get started in minutes</h2>
+            <p className="meta text-[#a9b4aa]">Featured project</p>
+            <h2 className="display mt-4 text-[40px] leading-[1.08] break-words md:text-[56px]">clov-embed-v2</h2>
+            <p className="display mt-2 text-[24px] leading-[1.2] md:text-[28px]">My own embedding model, trained from scratch</p>
             <p className="mt-4 max-w-[30rem] text-[18px] leading-[28px] text-[#c8cfc7]">
-              Load the model with ONNX Runtime for retrieval and RAG pipelines. It needs a tokenizer, one ONNX file and no
-              GPU.
+              I built the 6-layer RoPE encoder in PyTorch and benchmarked its FP32 and INT8 ONNX exports, taking it from
+              134.3 MB to 34.6 MB. It runs for retrieval and RAG with a tokenizer, one ONNX file and no GPU.
             </p>
             <div className="mt-8 max-w-[30rem] border-b border-white/10">
               {FACTS.map((f) => (

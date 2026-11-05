@@ -43,7 +43,7 @@ export function Logo({ draw = false }: { draw?: boolean }) {
     <span className="inline-flex items-center gap-2">
       <LogoMark draw={draw} />
       <span className="display text-[21px] leading-none tracking-[-0.01em] text-foreground" style={{ fontWeight: 500 }}>
-        CloveAI
+        Alan Joshua
       </span>
     </span>
   );

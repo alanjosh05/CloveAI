@@ -12,23 +12,23 @@ const newsreader = Newsreader({
   axes: ["opsz"],
 });
 
+const title = "Alan Joshua, builds and evaluates AI systems";
 const description =
-  "clov-embed-v2 is a 34M parameter sentence embedding model trained from scratch by Alan Joshua. CloveAI also publishes a chart-reading vision model, a biomedical LLM, classifiers and open datasets on Hugging Face.";
+  "Alan Joshua is a computer science student in Coimbatore who builds and evaluates AI systems: document extraction at Nunnari Labs, ERP and CRM systems with AI automation, and clov-embed-v2, an embedding model trained from scratch.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://clove-ai-sooty.vercel.app"),
-  title: "CloveAI, home of clov-embed-v2 by Alan Joshua",
+  metadataBase: new URL("https://clove-ai-research.vercel.app"),
+  title,
   description,
   keywords:
-    "AI, machine learning, text embedding, vision language model, biomedical LLM, open source, Hugging Face, ONNX, sentence-transformers",
-  authors: [{ name: "Alan Joshua", url: "https://huggingface.co/CloveAI" }],
+    "Alan Joshua, portfolio, GenAI engineer, document extraction, LLM fine-tuning, text embedding, ONNX, Hugging Face, Coimbatore",
+  authors: [{ name: "Alan Joshua", url: "https://github.com/alanjosh05" }],
   creator: "Alan Joshua",
-  publisher: "CloveAI",
   category: "technology",
   openGraph: {
-    title: "CloveAI, home of clov-embed-v2 by Alan Joshua",
+    title,
     description,
-    images: [{ url: "/brand/icon-512.png", width: 512, height: 512, alt: "CloveAI" }],
+    images: [{ url: "/brand/icon-512.png", width: 512, height: 512, alt: "Alan Joshua's clover mark" }],
   },
 };
 

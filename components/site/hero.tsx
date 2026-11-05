@@ -1,30 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HF } from "@/lib/catalog";
-import type { SpecimenKey } from "@/lib/specimens";
+import { EMAIL } from "@/lib/catalog";
 import { LazySpecimen } from "./lazy-canvas";
 import { Reveal } from "./reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const NOW: [string, string][] = [
+  ["Now", "GenAI Intern, Nunnari Labs"],
+  ["Also", "Freelance engineer, 2 active clients"],
+  ["Studying", "B.Tech CSBS, 2027, and B.S. Data Science, IIT Madras"],
+];
+
 export function Hero() {
   const root = useRef<HTMLElement>(null);
   const [scatter] = useState(() => ({ current: 0 }));
-  const [specimen, setSpecimen] = useState<SpecimenKey>("clover");
-
-  // The mark opens into the model it stands for.
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const t = setTimeout(() => setSpecimen("embed"), reduced ? 0 : 2200);
-    return () => clearTimeout(t);
-  }, []);
 
   // Scrolling away lets the clover go to seed.
   useGSAP(
@@ -41,52 +38,58 @@ export function Hero() {
   return (
     <section ref={root} id="top" className="relative mx-auto w-full max-w-[1440px] px-6 lg:px-10">
       <div className="grid grid-cols-1 lg:min-h-[calc(100svh-65px)] lg:grid-cols-12 lg:gap-8">
-        <Reveal className="z-10 flex flex-col justify-center pt-12 pb-4 lg:col-span-5 lg:pt-0 lg:pb-16">
-          <p className="meta text-muted-foreground">Text embedding, 34M parameters, MIT</p>
-          <h1 className="display mt-4 text-[44px] leading-[1.04] tracking-[-0.03em] break-words text-foreground md:text-[64px] xl:text-[76px]">
-            clov-embed-v2
+        <Reveal className="z-10 flex flex-col justify-center pt-12 pb-8 lg:col-span-6 lg:pt-0 lg:pb-16">
+          <p className="meta text-muted-foreground">Coimbatore, India</p>
+          <h1 className="display mt-4 text-[56px] leading-[1.02] tracking-[-0.03em] text-foreground md:text-[80px] xl:text-[104px]">
+            Alan Joshua
           </h1>
-          <p className="display mt-3 max-w-[20ch] text-[28px] leading-[1.15] text-foreground md:text-[36px]">
-            A sentence embedding model trained from scratch
+          <p className="display mt-3 text-[28px] leading-[1.15] text-foreground md:text-[36px]">
+            I build and evaluate AI systems
           </p>
           <p className="mt-6 max-w-[34rem] text-[18px] leading-[28px] text-muted-foreground">
-            A 6-layer Transformer with RoPE that turns text into 256-dimensional vectors at ~247 sentences/sec on a CPU.
-            Trained and published by Alan Joshua.
+            I read invoices with AI at Nunnari Labs, build ERP and CRM systems for freelance clients on AWS and GCP, and
+            trained my own embedding model, clov-embed-v2, from scratch.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="xl">
-              <a href="#docs">
-                Get the code
+              <a href="#work">
+                See my work
                 <ArrowRight data-icon="inline-end" strokeWidth={1.5} />
               </a>
             </Button>
             <Button asChild size="xl" variant="outline" className="bg-transparent">
-              <a href={`${HF}/CloveAI/clov-embed-v2`} target="_blank" rel="noopener noreferrer">
-                Model card
-                <ArrowUpRight data-icon="inline-end" strokeWidth={1.5} />
-              </a>
+              <a href={`mailto:${EMAIL}`}>Email me</a>
             </Button>
           </div>
+          <dl className="meta mt-10 grid max-w-[34rem] grid-cols-[72px_1fr] gap-x-4 gap-y-2 border-t border-border pt-4">
+            {NOW.map(([k, v]) => (
+              <div key={k} className="contents">
+                <dt className="text-muted-foreground">{k}</dt>
+                <dd className="text-foreground">{v}</dd>
+              </div>
+            ))}
+          </dl>
         </Reveal>
 
-        <div className="relative min-h-[480px] overflow-hidden border-b border-border lg:col-span-7 lg:min-h-0">
-          <div className="absolute inset-0 lg:right-[10%] lg:bottom-[6%]">
+        <div className="relative min-h-[480px] overflow-hidden border-b border-border lg:col-span-6 lg:min-h-0">
+          <div className="absolute inset-0 lg:right-[18%] lg:bottom-[8%]">
             <LazySpecimen
-              specimen={specimen}
-              label="Illustration of clov-embed-v2: sentences as ink dots clustered on a sphere. Drag to turn it."
+              specimen="clover"
+              showNotes={false}
+              label="Alan's clover mark drawn in ink dots. Drag to turn it."
               scatter={scatter}
             />
           </div>
           <Image
             src="/hero1.png"
-            alt="Alan Joshua"
+            alt="Portrait of Alan Joshua"
             width={650}
             height={782}
             priority
-            sizes="(min-width: 1024px) 340px, 200px"
-            className="pointer-events-none absolute right-0 bottom-0 h-auto w-[176px] grayscale-[0.9] contrast-[1.04] md:w-[240px] xl:w-[300px]"
+            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 320px, 260px"
+            className="pointer-events-none absolute right-0 bottom-0 h-auto w-[260px] grayscale-[0.9] contrast-[1.04] md:w-[320px] xl:w-[440px]"
           />
-          <p className="meta absolute bottom-4 left-0 max-w-[50%] text-muted-foreground">Fig. 1, illustration of vectors on a sphere. Drag to turn</p>
+          <p className="meta absolute bottom-4 left-0 hidden max-w-[28%] text-muted-foreground md:block">Drag the clover to turn it</p>
         </div>
       </div>
     </section>
