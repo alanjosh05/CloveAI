@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    images: [{ url: "/brand/icon-512.png", width: 512, height: 512, alt: "Alan Joshua's clover mark" }],
+    images: [{ url: "/brand/icon-512.png", width: 512, height: 512, alt: "Alan Joshua's AJ logo" }],
   },
 };
 

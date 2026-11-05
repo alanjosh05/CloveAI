@@ -39,7 +39,7 @@ export function Closing() {
             </div>
           </div>
           <div className="hidden justify-end lg:col-span-4 lg:flex">
-            <LogoMark className="size-56" />
+            <LogoMark className="h-56" />
           </div>
         </Reveal>
       </section>

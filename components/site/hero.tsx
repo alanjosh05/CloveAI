@@ -23,7 +23,7 @@ export function Hero() {
   const root = useRef<HTMLElement>(null);
   const [scatter] = useState(() => ({ current: 0 }));
 
-  // Scrolling away lets the clover go to seed.
+  // Scrolling away scatters the mark like seed.
   useGSAP(
     () => {
       gsap.to(scatter, {
@@ -74,9 +74,9 @@ export function Hero() {
         <div className="relative min-h-[480px] overflow-hidden border-b border-border lg:col-span-6 lg:min-h-0">
           <div className="absolute inset-0 lg:right-[18%] lg:bottom-[8%]">
             <LazySpecimen
-              specimen="clover"
+              specimen="mark"
               showNotes={false}
-              label="Alan's clover mark drawn in ink dots. Drag to turn it."
+              label="Alan's AJ logo drawn in ink dots. Drag to turn it."
               scatter={scatter}
             />
           </div>
@@ -89,7 +89,7 @@ export function Hero() {
             sizes="(min-width: 1280px) 440px, (min-width: 1024px) 320px, 260px"
             className="pointer-events-none absolute right-0 bottom-0 h-auto w-[260px] grayscale-[0.9] contrast-[1.04] md:w-[320px] xl:w-[440px]"
           />
-          <p className="meta absolute bottom-4 left-0 hidden max-w-[28%] text-muted-foreground md:block">Drag the clover to turn it</p>
+          <p className="meta absolute bottom-4 left-0 hidden max-w-[28%] text-muted-foreground md:block">Drag the mark to turn it</p>
         </div>
       </div>
     </section>

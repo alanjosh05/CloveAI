@@ -27,7 +27,7 @@ Open http://localhost:3000. Use `npm run build` for a production build and `npm 
 | `components/site/` | The page sections |
 | `components/ui/` | shadcn/ui components |
 | `components/base/` | BoardUI components |
-| `public/brand/` | Logo files |
+| `public/brand/` | Logo files: the AJ mark, its heavier small cut, lockups and icons |
 | `public/hairline/` | The plant press in Skills: the unchanged Hairline engine (`kernel.js`), the figure (`press.js`) and a standalone page (`press.html`) |
 
 ## Stack

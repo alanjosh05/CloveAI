@@ -2,7 +2,7 @@
 // one can morph into any other, and each shape shows what that piece of work actually does.
 
 export type SpecimenKey =
-  | "clover"
+  | "mark"
   | "vision"
   | "bio"
   | "web"
@@ -54,54 +54,57 @@ function shadedSphere(put: Put, r: () => number, count: number, c: number[], rad
   }
 }
 
-function clover(put: Put, n: number, r: () => number): Note[] {
-  const dirs: [number, number][] = [
-    [Math.SQRT1_2, -Math.SQRT1_2],
-    [-Math.SQRT1_2, -Math.SQRT1_2],
-    [-Math.SQRT1_2, Math.SQRT1_2],
-  ];
-  const L = 1.72;
-  const inner = 0.1;
-  const hw = 0.5;
-  const leafN = Math.floor((n * 0.78) / 3);
+function mark(put: Put, n: number, r: () => number): Note[] {
+  // The AJ logo as a thin slab. Works in the logo's own 256 grid, centred and flipped into world space.
+  const S = 3.2 / 227;
+  const depth = 0.09;
+  const k = Math.tan(Math.PI / 3);
+  const leftOfLeg = (y: number) => 177 - (y - 16) / k;
+  const slab = (x: number, y: number, tone = 0) => {
+    // Most dots sit on the two faces, so the letters stay crisp as the slab turns.
+    const z = r() < 0.82 ? (r() < 0.5 ? -depth : depth) : (r() * 2 - 1) * depth;
+    put((x - 128) * S, (130 - y) * S, z, tone);
+  };
+  const cubic = (p: number[][], t: number) => {
+    const u = 1 - t;
+    return [0, 1].map(
+      (a) => u * u * u * p[0][a] + 3 * u * u * t * p[1][a] + 3 * u * t * t * p[2][a] + t * t * t * p[3][a],
+    );
+  };
+  const outer = [[197, 172], [197, 220], [163, 243], [121, 243]];
+  const inner = [[163, 172], [163, 212], [145, 230], [121, 230]];
 
-  dirs.forEach(([dx, dy]) => {
-    const lat = [-dy, dx];
-    for (let i = 0; i < leafN; i++) {
-      const pick = r();
-      let u: number;
-      let v: number;
-      if (pick < 0.46) {
-        u = Math.acos(1 - 2 * r()) / Math.PI;
-        v = (r() * 2 - 1) * 0.98;
-      } else if (pick < 0.68) {
-        u = r();
-        v = (r() < 0.5 ? -1 : 1) * (0.97 + r() * 0.03);
-      } else if (pick < 0.82) {
-        u = r();
-        v = gauss(r) * 0.012;
-      } else {
-        // side veins sweep forward from the midrib to the rim
-        const k = 1 + Math.floor(r() * 5);
-        const t = r();
-        const side = r() < 0.5 ? -1 : 1;
-        u = Math.min(1, k / 7.5 + t * 0.14);
-        v = side * t * 0.95;
-      }
-      const w = hw * Math.pow(Math.sin(Math.PI * u), 0.82);
-      const along = inner + u * (L - inner);
-      const across = v * w;
-      const cup = 0.34 * Math.sin(Math.PI * u) - 0.5 * (v * w) * (v * w) * 2.2 - 0.28 * u * u;
-      put(dx * along + lat[0] * across, dy * along + lat[1] * across, cup + gauss(r) * 0.006, 0);
-    }
-  });
+  const dotN = Math.floor(n * 0.12);
+  const legN = Math.floor(n * 0.3);
+  const barN = Math.floor(n * 0.06);
+  const bowlN = Math.floor(n * 0.2);
+  const stemN = n - dotN - legN - barN - bowlN;
 
-  const placed = leafN * 3;
-  shadedSphere(put, r, n - placed, [0.72, 0.72, 0.12], 0.44, 1);
-  return [
-    { at: [1.02, 1.02, 0.3], text: "Fourth sepal, a data point" },
-    { at: [-0.7, 0.7, 0.3], text: "Drag to turn" },
-  ];
+  for (let i = 0; i < stemN; i++) {
+    const y = 16 + r() * 156;
+    const x = 163 + r() * 34;
+    // The stem's top is cut along the leg, so the apex stays one point.
+    if (x < leftOfLeg(y)) slab(leftOfLeg(y) + r() * (197 - leftOfLeg(y)), y);
+    else slab(x, y);
+  }
+  for (let i = 0; i < bowlN; i++) {
+    const t = r();
+    const a = cubic(inner, t);
+    const b = cubic(outer, t);
+    const u = r();
+    slab(a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u);
+  }
+  for (let i = 0; i < legN; i++) {
+    const y = 16 + r() * 180;
+    slab(leftOfLeg(y) + r() * 15, y);
+  }
+  for (let i = 0; i < barN; i++) {
+    const y = 134 + r() * 12;
+    const x0 = leftOfLeg(y) + 15;
+    slab(x0 + r() * (163 - x0), y);
+  }
+  shadedSphere(put, r, dotN, [(77.58 - 128) * S, (130 - 217) * S, 0], 19 * S, 1);
+  return [];
 }
 
 function vision(put: Put, n: number, r: () => number): Note[] {
@@ -482,7 +485,7 @@ function phone(put: Put, n: number, r: () => number): Note[] {
 }
 
 const BUILDERS: Record<SpecimenKey, (put: Put, n: number, r: () => number) => Note[]> = {
-  clover,
+  mark,
   vision,
   bio,
   web,
